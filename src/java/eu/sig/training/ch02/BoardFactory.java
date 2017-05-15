@@ -25,13 +25,17 @@ class BoardCreator {
         assert grid != null;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                Square square = grid[x][y];
-                for (Direction dir : Direction.values()) {
-                    createLink(x, y, square, dir);
-                }
+                setDirection(x, y);
             }
         }
         return board;
+	}
+
+	private void setDirection(int x, int y) {
+		Square square = grid[x][y];
+		for (Direction dir : Direction.values()) {
+		    createLink(x, y, square, dir);
+		}
 	}
 
 	private void createLink(int x, int y, Square square, Direction dir) {
@@ -43,7 +47,6 @@ class BoardCreator {
 }
 
 class Board {
-    @SuppressWarnings("unused")
     public Board(Square[][] grid) {}
 
     public int getWidth() {
@@ -56,7 +59,6 @@ class Board {
 }
 
 class Square {
-    @SuppressWarnings("unused")
     public void link(Square neighbour, Direction dir) {}
 }
 
