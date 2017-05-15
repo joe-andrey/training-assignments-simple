@@ -10,29 +10,31 @@ public class BoardFactory {
 
 class BoardCreator {
 	private Square[][] grid;
+	private Board board;
+	private int width;
+	private int height;
 
 	BoardCreator(Square[][] grid) {
 		this.grid = grid;
+        this.board = new Board(grid);
+        this.width = this.board.getWidth();
+        this.height = this.board.getHeight();        
 	}
 	
 	public Board create() {
         assert grid != null;
-        Board board = new Board(grid);
-        int width = board.getWidth();
-        int height = board.getHeight();        
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 Square square = grid[x][y];
                 for (Direction dir : Direction.values()) {
-                    createLink(grid, width, height, x, y, square, dir);
+                    createLink(x, y, square, dir);
                 }
             }
         }
-
         return board;
 	}
 
-	private void createLink(Square[][] grid, int width, int height, int x, int y, Square square, Direction dir) {
+	private void createLink(int x, int y, Square square, Direction dir) {
 		int dirX = (width + x + dir.getDeltaX()) % width;
 		int dirY = (height + y + dir.getDeltaY()) % height;
 		Square neighbour = grid[dirX][dirY];
