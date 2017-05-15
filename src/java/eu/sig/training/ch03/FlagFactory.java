@@ -6,28 +6,79 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.validator.PublicClassValidator;
+
 import eu.sig.training.ch03.Nationality;
 
 public class FlagFactory {
 	
-	public static Map<Nationality, List<Color>> FLAGS = new HashMap<Nationality, List<Color>>();
+	public static class DutchFlag implements Flag{
+		@Override
+		public List<Color> getColors() {
+			return Arrays.asList(Color.RED,Color.WHITE, Color.BLUE);
+		}
+	}
+	
+	public static class GermanFlag implements Flag{
+		@Override
+		public List<Color> getColors() {
+			return Arrays.asList(Color.RED,Color.WHITE, Color.BLUE);
+		}
+	}
+	
+	public static class BelgianFlag implements Flag{
+		@Override
+		public List<Color> getColors() {
+			return Arrays.asList(Color.RED,Color.WHITE, Color.BLUE);
+		}
+	}
+	
+	
+	public static class FrenchFlag implements Flag{
+		@Override
+		public List<Color> getColors() {
+			return Arrays.asList(Color.RED,Color.WHITE, Color.BLUE);
+		}
+	}
+	
+	
+	public static class ItalianFlag implements Flag{
+		@Override
+		public List<Color> getColors() {
+			return Arrays.asList(Color.RED,Color.WHITE, Color.BLUE);
+		}
+	}
+	
+	
+	public static class RomaniaFlag implements Flag{
+		@Override
+		public List<Color> getColors() {
+			return Arrays.asList(Color.RED,Color.WHITE, Color.BLUE);
+		}
+	}
+	
+	public static class DefaultFlag implements Flag{
+		@Override
+		public List<Color> getColors() {
+			return Arrays.asList(Color.GRAY);
+		}
+	}
+	
+	public static Map<Nationality, Flag> FLAGS = new HashMap<Nationality, Flag>();
 	
 	static {
-		FLAGS.put(Nationality.DUTCH, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
-		FLAGS.put(Nationality.GERMAN, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
-		FLAGS.put(Nationality.BELGIAN, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
-		FLAGS.put(Nationality.FRENCH, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
-		FLAGS.put(Nationality.ITALIAN, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
-		FLAGS.put(Nationality.ROMANIA, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
-		FLAGS.put(Nationality.IRELAND, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
-		FLAGS.put(Nationality.HUNGARIAN, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
-		FLAGS.put(Nationality.BULGARIAN, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
-		FLAGS.put(Nationality.RUSSIA, Arrays.asList(Color.RED,Color.WHITE, Color.BLUE));
+		FLAGS.put(Nationality.DUTCH, new FlagFactory.DutchFlag());
+		FLAGS.put(Nationality.GERMAN, new FlagFactory.GermanFlag());
+		FLAGS.put(Nationality.BELGIAN, new FlagFactory.BelgianFlag());
+		FLAGS.put(Nationality.FRENCH, new FlagFactory.FrenchFlag());
+		FLAGS.put(Nationality.ITALIAN, new FlagFactory.ItalianFlag());
+		FLAGS.put(Nationality.ROMANIA, new FlagFactory.RomaniaFlag());
 	}
 	
 	public List<Color> getFlagColors(Nationality nationality){
-		List<Color> colors = FLAGS.get(nationality);
-		return colors != null ? colors : Arrays.asList(Color.GRAY);
+		Flag  flag = FLAGS.get(nationality);
+		flag = flag != null ? flag : new DefaultFlag();
+		return flag.getColors();
 	}
 
 }
