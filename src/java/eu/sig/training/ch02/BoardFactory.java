@@ -2,7 +2,7 @@ package eu.sig.training.ch02;
 
 public class BoardFactory {
     // tag::createBoard[]
-    public Board createBoard(Square[][] grid) {
+public Board createBoard(Square[][] grid) {
         assert grid != null;
 
         Board board = new Board(grid);
@@ -25,6 +25,7 @@ public class BoardFactory {
     }
     // end::createBoard[]
 }
+
 
 class Board {
     @SuppressWarnings("unused")
