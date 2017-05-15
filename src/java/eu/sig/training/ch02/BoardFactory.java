@@ -1,12 +1,12 @@
 package eu.sig.training.ch02;
 
 public class BoardFactory {
-    // tag::createBoard[]
+    
     public Board createBoard(Square[][] grid) {
     	return new BoardCreator(grid).create();
     }
-    // end::createBoard[]
 }
+
 
 class BoardCreator {
 	private Square[][] grid;
@@ -45,6 +45,7 @@ class BoardCreator {
 		square.link(neighbour, dir);
 	}
 }
+
 
 class Board {
     public Board(Square[][] grid) {}
