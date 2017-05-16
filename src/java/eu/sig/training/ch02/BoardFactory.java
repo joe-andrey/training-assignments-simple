@@ -1,4 +1,4 @@
-package eu.sig.training.ch02;
+  package eu.sig.training.ch02;
 
 public class BoardFactory {
     
@@ -34,16 +34,14 @@ class BoardCreator {
 	private void setDirection(int x, int y) {
 		Square square = grid[x][y];
 		for (Direction dir : Direction.values()) {
-		    createLink(x, y, square, dir);
+			int dirX = (width + x + dir.getDeltaX()) % width;
+			int dirY = (height + y + dir.getDeltaY()) % height;
+			Square neighbour = grid[dirX][dirY];
+		    square.link(neighbour, dir);
 		}
 	}
 
-	private void createLink(int x, int y, Square square, Direction dir) {
-		int dirX = (width + x + dir.getDeltaX()) % width;
-		int dirY = (height + y + dir.getDeltaY()) % height;
-		Square neighbour = grid[dirX][dirY];
-		square.link(neighbour, dir);
-	}
+
 }
 
 
